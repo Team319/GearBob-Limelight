@@ -27,9 +27,9 @@ public class Drivetrain extends Subsystem {
 	private BobTalonSRX leftFollower = new BobTalonSRX(2);
 	private BobTalonSRX leftFollower1 = new BobTalonSRX(3);
 	private BobTalonSRX leftFollower2 = new BobTalonSRX(4);
-	private BobTalonSRX rightFollower = new BobTalonSRX(9);
+	private BobTalonSRX rightFollower = new BobTalonSRX(7);
 	private BobTalonSRX rightFollower1 = new BobTalonSRX(8);
-	private BobTalonSRX rightFollower2 = new BobTalonSRX(6);
+	private BobTalonSRX rightFollower2 = new BobTalonSRX(9);
 	
 	public LeaderBobTalonSRX leftLead = new LeaderBobTalonSRX(1, leftFollower, leftFollower1, leftFollower2);
 	public LeaderBobTalonSRX rightLead = new LeaderBobTalonSRX(10, rightFollower, rightFollower1, rightFollower2);
