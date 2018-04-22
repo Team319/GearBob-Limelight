@@ -7,9 +7,11 @@
 
 package org.usfirst.frc.team319.robot;
 
-import org.usfirst.frc.team319.robot.commands.autonomous_paths.ExampleAutoCommandGroup;
 import org.usfirst.frc.team319.robot.subsystems.Drivetrain;
-import org.usfirst.frc.team319.robot.subsystems.Pneumatics;
+
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -24,21 +26,20 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
-
+    
 	Command autonomousCommand;
 	SendableChooser<String> autoChooser;
 
 	public static final Drivetrain drivetrain = new Drivetrain();
-	public static final Pneumatics pneumatics = new Pneumatics();
+
 	public static OI oi;
 
 	// SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 	@Override
 	public void robotInit() {
-
+		
 		oi = new OI();
-		Robot.drivetrain.setDrivetrainPositionToZero();
 
 		autoChooser = new SendableChooser<String>();
 		autoChooser.addDefault("Example Auto", "Example Auto");
@@ -56,28 +57,15 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putNumber("Driver Left Trigger", Robot.oi.driverController.triggers.getLeft());
-		SmartDashboard.putNumber("Operator Left Stick Y", Robot.oi.operatorController.leftStick.getY());
+		//SmartDashboard.putNumber("Driver Left Trigger", Robot.oi.driverController.triggers.getLeft());
+		//SmartDashboard.putNumber("Operator Left Stick Y", Robot.oi.operatorController.leftStick.getY());
 
 	}
 
 	@Override
 	public void autonomousInit() {
 
-		// SmartDashboard.putData("Auto mode", m_chooser);
-		String selectedAuto = (String) autoChooser.getSelected();
-		System.out.println(selectedAuto);
-		switch (selectedAuto) {
-		case "ExampleAuto":
-			autonomousCommand = new ExampleAutoCommandGroup();
-			break;
 		}
-
-		// schedule the autonomous command (example)
-		if (autonomousCommand != null) {
-			autonomousCommand.start();
-		}
-	}
 
 	/**
 	 * This function is called periodically during autonomous.

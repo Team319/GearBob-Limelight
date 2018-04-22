@@ -18,9 +18,10 @@ public class OI {
 	public BobXboxController operatorController;
 
 	public OI() {
-/*
-		driverController = new BobXboxController(0, 0.10, 0.08);
 
+		//driverController = new BobXboxController(0, 0.10, 0.08);
+		driverController = new BobXboxController(0, 0.20, 0.10);
+		/*
 		driverController.leftTriggerButton.configureThreshold(0.075);
 
 		driverController.rightBumper.whenPressed(new ());
@@ -30,9 +31,10 @@ public class OI {
 		driverController.bButton.whenPressed(new ());
 		driverController.startButton.whenPressed(new ());
 		driverController.leftStickButton.whenPressed(new ());
-
+*/
 	
-
+		
+/*
 		operatorController = new BobXboxController(1, 0.1, 0.125);
 		
 		operatorController.leftTriggerButton.whenPressed(new ());
