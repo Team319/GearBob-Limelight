@@ -4,6 +4,7 @@ import org.usfirst.frc.team319.models.BobTalonSRX;
 import org.usfirst.frc.team319.models.DriveSignal;
 import org.usfirst.frc.team319.models.LeaderBobTalonSRX;
 import org.usfirst.frc.team319.models.SRXGains;
+import org.usfirst.frc.team319.robot.Robot;
 import org.usfirst.frc.team319.robot.commands.drivetrain.BobDrive;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -24,29 +25,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class Drivetrain extends Subsystem {
-
-	private BobTalonSRX leftFollower = new BobTalonSRX(2);
-	private BobTalonSRX leftFollower1 = new BobTalonSRX(3);
-	private BobTalonSRX leftFollower2 = new BobTalonSRX(4);
-	private BobTalonSRX rightFollower = new BobTalonSRX(7);
-	private BobTalonSRX rightFollower1 = new BobTalonSRX(8);
-	private BobTalonSRX rightFollower2 = new BobTalonSRX(10);
 	
-	public LeaderBobTalonSRX leftLead = new LeaderBobTalonSRX(1, leftFollower, leftFollower1, leftFollower2);
-	public LeaderBobTalonSRX rightLead = new LeaderBobTalonSRX(9, rightFollower, rightFollower1, rightFollower2);
+	NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+	NetworkTableEntry tx = table.getEntry("tx");
+	NetworkTableEntry ty = table.getEntry("ty");
+	NetworkTableEntry ta = table.getEntry("ta");
+	double x = tx.getDouble(0);
+	double y = ty.getDouble(0);
+	double area = ta.getDouble(0);
+	
+	public LeaderBobTalonSRX leftLead = new LeaderBobTalonSRX(1, new BobTalonSRX(2), new BobTalonSRX(3), new BobTalonSRX(4));
+	public LeaderBobTalonSRX rightLead = new LeaderBobTalonSRX(9,new BobTalonSRX(7), new BobTalonSRX(8), new BobTalonSRX(10));
 
 	public Drivetrain() {
-		
-		NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-		NetworkTableEntry tx = table.getEntry("tx");
-		NetworkTableEntry ty = table.getEntry("ty");
-		NetworkTableEntry ta = table.getEntry("ta");
-		double x = tx.getDouble(0);
-		double y = ty.getDouble(0);
-		double area = ta.getDouble(0);
-		
-
-		// These Values will be different for every Robot :)
 		leftLead.setInverted(false);
 		leftLead.configPrimaryFeedbackDevice(FeedbackDevice.CTRE_MagEncoder_Relative);
 		leftLead.setSensorPhase(false);
@@ -56,9 +47,9 @@ public class Drivetrain extends Subsystem {
 		rightLead.setSensorPhase(false);
 
 		leftLead.enableCurrentLimit(false);
-		leftLead.configContinuousCurrentLimit(10);
+		leftLead.configContinuousCurrentLimit(12);
 		rightLead.enableCurrentLimit(false);
-		rightLead.configContinuousCurrentLimit(10);
+		rightLead.configContinuousCurrentLimit(12);
 
 		leftLead.configOpenloopRamp(0.25);
 		rightLead.configOpenloopRamp(0.25);
@@ -69,9 +60,19 @@ public class Drivetrain extends Subsystem {
 		rightLead.configSensorSum(FeedbackDevice.RemoteSensor0, FeedbackDevice.CTRE_MagEncoder_Relative);
 		rightLead.configPrimaryFeedbackDevice(FeedbackDevice.SensorSum, 0.5); 
 		
-	}																			// distances from left and right are
-																				// summed, so average them
-
+	}										
+	public double getVisionX() {
+		return this.x;
+	}
+	
+	public double getVisionY() {
+		return this.y;
+	}
+	
+	public double getVisionArea() {
+		return this.area;
+	}
+	
 	public void initDefaultCommand() {
 		setDefaultCommand(new BobDrive());
 	}
@@ -147,9 +148,12 @@ public class Drivetrain extends Subsystem {
 	public double getVelocity() {
 		return rightLead.getPrimarySensorVelocity();
 	}
-
+	
 	@Override
 	public void periodic() {
 		
+		SmartDashboard.putNumber("x?", this.x);
+		SmartDashboard.putNumber("y?", this.y);
+		SmartDashboard.putNumber("area?", this.area);
 	}
 }
