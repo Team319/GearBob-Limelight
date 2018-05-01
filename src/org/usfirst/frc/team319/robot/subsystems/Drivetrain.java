@@ -25,54 +25,44 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class Drivetrain extends Subsystem {
-	
+
 	NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
 	NetworkTableEntry tx = table.getEntry("tx");
 	NetworkTableEntry ty = table.getEntry("ty");
 	NetworkTableEntry ta = table.getEntry("ta");
-	double x = tx.getDouble(0);
-	double y = ty.getDouble(0);
-	double area = ta.getDouble(0);
-	
-	public LeaderBobTalonSRX leftLead = new LeaderBobTalonSRX(1, new BobTalonSRX(2), new BobTalonSRX(3), new BobTalonSRX(4));
-	public LeaderBobTalonSRX rightLead = new LeaderBobTalonSRX(9,new BobTalonSRX(7), new BobTalonSRX(8), new BobTalonSRX(10));
+
+	public double x;
+	public double y;
+	public double area;
+
+	public LeaderBobTalonSRX leftLead = new LeaderBobTalonSRX(1, new BobTalonSRX(2), new BobTalonSRX(3),
+			new BobTalonSRX(4));
+	public LeaderBobTalonSRX rightLead = new LeaderBobTalonSRX(9, new BobTalonSRX(7), new BobTalonSRX(8),
+			new BobTalonSRX(10));
 
 	public Drivetrain() {
 		leftLead.setInverted(false);
-		leftLead.configPrimaryFeedbackDevice(FeedbackDevice.CTRE_MagEncoder_Relative);
 		leftLead.setSensorPhase(false);
+		leftLead.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
 
 		rightLead.setInverted(true);
-		rightLead.configPrimaryFeedbackDevice(FeedbackDevice.CTRE_MagEncoder_Relative);
-		rightLead.setSensorPhase(false);
+		rightLead.setSensorPhase(true);
+		rightLead.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
 
-		leftLead.enableCurrentLimit(false);
-		leftLead.configContinuousCurrentLimit(12);
-		rightLead.enableCurrentLimit(false);
-		rightLead.configContinuousCurrentLimit(12);
+	}
 
-		leftLead.configOpenloopRamp(0.25);
-		rightLead.configOpenloopRamp(0.25);
-
-		setNeutralMode(NeutralMode.Coast);
-
-		rightLead.configRemoteSensor0(leftLead.getDeviceID(), RemoteSensorSource.TalonSRX_SelectedSensor);
-		rightLead.configSensorSum(FeedbackDevice.RemoteSensor0, FeedbackDevice.CTRE_MagEncoder_Relative);
-		rightLead.configPrimaryFeedbackDevice(FeedbackDevice.SensorSum, 0.5); 
-		
-	}										
 	public double getVisionX() {
 		return this.x;
 	}
-	
+
 	public double getVisionY() {
 		return this.y;
 	}
-	
+
 	public double getVisionArea() {
 		return this.area;
 	}
-	
+
 	public void initDefaultCommand() {
 		setDefaultCommand(new BobDrive());
 	}
@@ -85,75 +75,48 @@ public class Drivetrain extends Subsystem {
 	public void drive(ControlMode controlMode, double left, double right) {
 		this.leftLead.set(controlMode, left);
 		this.rightLead.set(controlMode, right);
-	} 
+	}
 
 	public void drive(ControlMode controlMode, DriveSignal driveSignal) {
 		this.drive(controlMode, driveSignal.getLeft(), driveSignal.getRight());
 	}
 
-	public double getLeftDriveLeadDistance() {
-		return this.leftLead.getSelectedSensorPosition();
+	public void returnLimelight() {
+		double x = tx.getDouble(0);
+		double y = ty.getDouble(0);
+		double area = ta.getDouble(0);
+
+		this.x = x;
+		this.y = y;
+		this.area = area;
 	}
 
-	public double getRightDriveLeadDistance() {
-		return this.rightLead.getSelectedSensorPosition();
+	public double returnX() {
+		return this.x;
 	}
 
-	public double getLeftDriveLeadVelocity() {
-		return this.leftLead.getSelectedSensorVelocity();
+	public double returnY() {
+		return this.y;
 	}
 
-	public double getRightDriveLeadVelocity() {
-		return this.rightLead.getSelectedSensorVelocity();
+	public double returnArea() {
+		return this.area;
 	}
 
-	public void setDrivetrainPositionToZero() {
-		this.leftLead.setSelectedSensorPosition(0);
-		this.rightLead.setSelectedSensorPosition(0);
+	public double track() {
+		double moveValue;
+		if (area < 90.0 && area > 0.0) {
+			moveValue = -0.3 / area;
+		} else {
+			moveValue = 0.0;
+		}
+		return moveValue;
 	}
 
-	public double getLeftLeadVoltage() {
-		return this.leftLead.getMotorOutputVoltage();
-	}
-
-	public double getRightLeadVoltage() {
-		return this.rightLead.getMotorOutputVoltage();
-	}
-
-	public double getLeftClosedLoopError() {
-		return this.leftLead.getClosedLoopError();
-	}
-
-	public double getRightClosedLoopError() {
-		return this.rightLead.getClosedLoopError();
-	}
-
-	public TalonSRX getLeftLeadTalon() {
-		return this.getLeftLeadTalon();
-	}
-
-	public TalonSRX getRightLeadTalon() {
-		return this.getRightLeadTalon();
-	}
-
-	public void setNeutralMode(NeutralMode neutralMode) {
-		this.leftLead.setNeutralMode(neutralMode);
-		this.rightLead.setNeutralMode(neutralMode);
-	}
-
-	public double getDistance() {
-		return rightLead.getPrimarySensorPosition();
-	}
-
-	public double getVelocity() {
-		return rightLead.getPrimarySensorVelocity();
-	}
-	
 	@Override
 	public void periodic() {
-		
-		SmartDashboard.putNumber("x?", this.x);
-		SmartDashboard.putNumber("y?", this.y);
-		SmartDashboard.putNumber("area?", this.area);
+		SmartDashboard.putNumber("X", returnX());
+		SmartDashboard.putNumber("Area", returnArea());
 	}
+
 }
