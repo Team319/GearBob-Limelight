@@ -33,8 +33,8 @@ public class BobDriveTracking extends Command {
     	double moveValue = Robot.drivetrain.track();
     	//double moveValue = 0.0;
     	
-    	double rotateValue = x * 0.01;
-    	
+    	//double rotateValue = x * 0.01;
+    	double rotateValue = Robot.drivetrain.rotationSafety();
     	
     	boolean quickTurn = (moveValue < quickTurnThreshold && moveValue > -quickTurnThreshold);
     	DriveSignal driveSignal = helper.cheesyDrive(-moveValue, rotateValue, quickTurn, false);
