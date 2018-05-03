@@ -2,10 +2,8 @@
 package org.usfirst.frc.team319.robot;
 
 import org.usfirst.frc.team319.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team319.robot.subsystems.Acubeulator;
 
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -18,6 +16,7 @@ public class Robot extends TimedRobot {
 	SendableChooser<String> autoChooser;
 
 	public static final Drivetrain drivetrain = new Drivetrain();
+	public static final Acubeulator acubeulator = new Acubeulator();
 
 	public static OI oi;
 	
