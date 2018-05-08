@@ -105,23 +105,14 @@ public class Drivetrain extends Subsystem {
 
 	public double track() {
 		double moveValue;
-		if (area < 90.0 && area > 0.5) {
-			moveValue = -0.1 / area;
+		if (area < 90.0 && area > 0.0) {
+			moveValue = -0.3 / area;
 		} else {
 			moveValue = 0.0;
 		}
 		return moveValue;
 	}
 	
-	public double rotationSafety() {
-		double rotateValue;
-		if (x == 0.0) {
-			rotateValue = 0.0;
-		} else {
-			rotateValue = x * 0.01;
-		}
-		return rotateValue;
-	}
 
 
 	@Override
