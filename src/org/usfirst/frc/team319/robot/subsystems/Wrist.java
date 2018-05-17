@@ -69,6 +69,16 @@ public class Wrist extends Subsystem {
 	public void initDefaultCommand() {
 		setDefaultCommand(new JoystickWrist());
 	}
+	
+	public void wristMove(ControlMode controlMode, double targetPosition) {
+		this.manageMotion(targetPosition);
+		wristMotor.set(controlMode, targetPosition);
+	}
+	
+	public void motionMagicControl() {
+		manageMotion(targetPosition);
+		wristMotor.set(ControlMode.MotionMagic, targetPosition);
+	}
 
 	public void motionMagicPositionControl(double positionScalar) {
 		double encoderPosition = 0;
@@ -105,12 +115,24 @@ public class Wrist extends Subsystem {
     	}
 	}
 	
+	
 	public int getTargetPosition() {
 		return this.targetPosition;
 	}
 	
 	public int getCurrentPosition() {
 		return this.wristMotor.getSelectedSensorPosition();
+	}
+	public boolean isValidPosition(int position) {
+		return (position >= upPositionLimit && position <= downPositionLimit);
+	}
+
+	public void incrementTargetPosition(int increment) {
+		int currentTargetPosition = this.targetPosition;
+		int newTargetPosition = currentTargetPosition + increment;
+		if (isValidPosition(newTargetPosition)) {
+			this.targetPosition = newTargetPosition;
+		}		
 	}
 	
 }
