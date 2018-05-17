@@ -2,6 +2,7 @@
 package org.usfirst.frc.team319.robot;
 
 import org.usfirst.frc.team319.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team319.robot.subsystems.Wrist;
 import org.usfirst.frc.team319.robot.subsystems.Acubeulator;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -17,7 +18,8 @@ public class Robot extends TimedRobot {
 
 	public static final Drivetrain drivetrain = new Drivetrain();
 	public static final Acubeulator acubeulator = new Acubeulator();
-
+	public static final Wrist wrist = new Wrist();
+	
 	public static OI oi;
 	
 
