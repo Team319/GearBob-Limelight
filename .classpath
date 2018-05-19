@@ -2,18 +2,21 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="C:/Users/BigBadBob 319/workspace/GearBob-Limelight/Build/cscore.jar"/>
-	<classpathentry kind="lib" path="C:/Users/BigBadBob 319/workspace/GearBob-Limelight/Build/cscore-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/BigBadBob 319/workspace/GearBob-Limelight/Build/CTRE_Phoenix.jar"/>
-	<classpathentry kind="lib" path="C:/Users/BigBadBob 319/workspace/GearBob-Limelight/Build/CTRE_Phoenix-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/BigBadBob 319/workspace/GearBob-Limelight/Build/json-simple-1.1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/BigBadBob 319/workspace/GearBob-Limelight/Build/ntcore.jar"/>
-	<classpathentry kind="lib" path="C:/Users/BigBadBob 319/workspace/GearBob-Limelight/Build/ntcore-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/BigBadBob 319/workspace/GearBob-Limelight/Build/opencv.jar"/>
-	<classpathentry kind="lib" path="C:/Users/BigBadBob 319/workspace/GearBob-Limelight/Build/opencv-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/BigBadBob 319/workspace/GearBob-Limelight/Build/WPILib.jar"/>
-	<classpathentry kind="lib" path="C:/Users/BigBadBob 319/workspace/GearBob-Limelight/Build/WPILib-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/BigBadBob 319/workspace/GearBob-Limelight/Build/wpiutil.jar"/>
-	<classpathentry kind="lib" path="C:/Users/BigBadBob 319/workspace/GearBob-Limelight/Build/wpiutil-sources.jar"/>
+	<classpathentry kind="lib" path="Build/cscore-sources.jar"/>
+	<classpathentry kind="lib" path="Build/cscore.jar"/>
+	<classpathentry kind="lib" path="Build/CTRE_Phoenix-sources.jar"/>
+	<classpathentry kind="lib" path="Build/CTRE_Phoenix.jar"/>
+	<classpathentry kind="lib" path="Build/json-simple-1.1-sources.jar"/>
+	<classpathentry kind="lib" path="Build/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="Build/libCTRE_PhoenixCCI.so"/>
+	<classpathentry kind="lib" path="Build/ntcore-sources.jar"/>
+	<classpathentry kind="lib" path="Build/ntcore.jar"/>
+	<classpathentry kind="lib" path="Build/opencv-sources.jar"/>
+	<classpathentry kind="lib" path="Build/opencv.jar"/>
+	<classpathentry kind="lib" path="Build/User_Libraries.properties"/>
+	<classpathentry kind="lib" path="Build/WPILib-sources.jar"/>
+	<classpathentry kind="lib" path="Build/WPILib.jar"/>
+	<classpathentry kind="lib" path="Build/wpiutil-sources.jar"/>
+	<classpathentry kind="lib" path="Build/wpiutil.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -35,10 +35,8 @@ public class Drivetrain extends Subsystem {
 	public double y;
 	public double area;
 
-	public LeaderBobTalonSRX leftLead = new LeaderBobTalonSRX(1, new BobTalonSRX(2), new BobTalonSRX(3),
-			new BobTalonSRX(4));
-	public LeaderBobTalonSRX rightLead = new LeaderBobTalonSRX(9, new BobTalonSRX(7), new BobTalonSRX(8),
-			new BobTalonSRX(10));
+	public LeaderBobTalonSRX leftLead = new LeaderBobTalonSRX(1, new BobTalonSRX(2));
+	public LeaderBobTalonSRX rightLead = new LeaderBobTalonSRX(3, new BobTalonSRX(4));
 
 	public Drivetrain() {
 		leftLead.setInverted(false);
